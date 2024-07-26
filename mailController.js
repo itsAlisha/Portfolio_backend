@@ -14,7 +14,7 @@ const transporter = nodemailer.createTransport({
 });
 
 // Send email function
-const sendEmail = (email, message, callback) => {
+const sendEmail = async (email, message, callback) => {
   const mailOptions = {
     from: { name: "Portfolio_Mail", address: process.env.EMAIL_USER }, // sender address
     to: process.env.EMAIL_USER, // list of receivers
@@ -22,7 +22,7 @@ const sendEmail = (email, message, callback) => {
     text: message, // plain text body
   };
 
-  transporter.sendMail(mailOptions, (error, info) => {
+  await transporter.sendMail(mailOptions, (error, info) => {
     if (error) {
       console.error("Error occurred:", error.message);
       return callback(error, null);
